@@ -23,11 +23,21 @@ class Falconstock
   def lookup_company(company)
     uri = URI("#{@lookup_url}input=#{company}")
     @lookup_response = JSON.parse(Net::HTTP.get(uri))
+
+    if @lookup_response.count == 0
+      puts "Could not find #{company}".colorize(:red)
+      exit 1
+    end
   end
 
   def lookup_quote(company)
     uri = URI("#{@quote_url}symbol=#{company}")
     @quote_response = JSON.parse(Net::HTTP.get(uri))
+
+    if @quote_response['Status'] != 'SUCCESS'
+      puts @quote_response['Message'].split('.').first.colorize(:red)
+      exit 1
+    end
   end
 
   def lookup_company_display(company)
