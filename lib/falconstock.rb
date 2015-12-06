@@ -13,11 +13,11 @@ class Falconstock
   end
 
   def config_dir_exists?
-    return File.directory?('~/.falcon-stock')
+    return File.directory?('~/.falconstock')
   end
 
   def config_file_exists?
-    return File.exists?('~/.falcon-stock/.falcon-stock.yml')
+    return File.exists?('~/.falcon-stock/.falconstock.yml')
   end
 
   def lookup_company(company)
@@ -52,7 +52,7 @@ class Falconstock
       puts "Price Change: $#{@quote_response['Change']}".colorize(:green)
       puts "% Change: #{@quote_response['ChangePercent']}".colorize(:green)
     end
-    
+
     puts ''
   end
 end
