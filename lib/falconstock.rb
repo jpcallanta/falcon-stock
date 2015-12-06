@@ -41,14 +41,18 @@ class Falconstock
   def lookup_quote_display(company)
     lookup_quote(company)
     company_name = "#{@quote_response['Name']} - #{@quote_response['Symbol']}"
-    underline = '=' * company_name.length
 
-    puts underline
-    puts company_name
-    puts "Last Price: $#{@quote_response['LastPrice']} - #{@quote_response['Timestamp']}"
-    puts "Price Change: $#{@quote_response['Change']}"
-    puts "% Change: #{@quote_response['ChangePercent']}"
-    puts underline
+    puts company_name.colorize(:blue)
+    puts "Last Price: $#{@quote_response['LastPrice']} - #{@quote_response['Timestamp']}".colorize(:green)
+
+    if @quote_response['Change'].to_s.include?('-')
+      puts "Price Change: $#{@quote_response['Change']}".colorize(:red)
+      puts "% Change: #{@quote_response['ChangePercent']}".colorize(:red)
+    else
+      puts "Price Change: $#{@quote_response['Change']}".colorize(:green)
+      puts "% Change: #{@quote_response['ChangePercent']}".colorize(:green)
+    end
+    
     puts ''
   end
 end
